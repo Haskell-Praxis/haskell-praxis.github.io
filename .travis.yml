@@ -1,0 +1,21 @@
+sudo: false
+language: generic
+env:
+  global:
+  - SSH_KEY="travis_key"
+  - GIT_NAME="Travis"
+  - GIT_EMAIL="travis@haskell-praxis"
+  - SOURCE_DIR="_site"
+  - DEPLOY_BRANCH="blog"
+cache:
+  directories:
+  - $HOME/.stack
+before_install:
+- openssl aes-256-cbc -K $encrypted_7f0741b80470_key -iv $encrypted_7f0741b80470_iv
+  -in deploy.enc -out deploy -d
+install:
+- stack install
+script:
+- stack build
+- stack exec site build
+- ./scripts/deploy.sh
