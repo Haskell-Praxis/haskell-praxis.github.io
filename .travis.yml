@@ -2,7 +2,7 @@ sudo: false
 language: generic
 env:
   global:
-  - SSH_KEY="travis_key"
+  - SSH_KEY="deploy"
   - GIT_NAME="Travis"
   - GIT_EMAIL="travis@haskell-praxis"
   - SOURCE_DIR="_site"
