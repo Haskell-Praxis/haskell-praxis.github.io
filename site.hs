@@ -69,4 +69,7 @@ postCtx =
     defaultContext
 
 postCtxWithTags :: Tags -> Context String
-postCtxWithTags tags = tagsField "tags" tags `mappend` postCtx
+postCtxWithTags tags
+    | len > 0 = tagsField "tags" tags `mappend` postCtx
+    | otherwise = postCtx
+    where len = length (tagsMap tags)
