@@ -5,6 +5,8 @@ author: Kevin Singer
 
 Evaluate one of the following IDEs (as listed on the [haskell-wiki](https://wiki.haskell.org/IDEs)):
 
+<div></div><!--more-->
+
 * various IntelliJ plugins for Haskell
 * EclipseFP plugin for Eclipse IDE
 * Colorer plugin for Eclipse IDE

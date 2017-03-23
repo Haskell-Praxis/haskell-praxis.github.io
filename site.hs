@@ -26,6 +26,7 @@ main = hakyll $ do
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
+            >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
             >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
             >>= relativizeUrls
@@ -38,6 +39,7 @@ main = hakyll $ do
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Home"                `mappend`
+                    teaserField "teaser" "content"           `mappend`
                     defaultContext
 
             getResourceBody
