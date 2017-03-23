@@ -25,10 +25,17 @@ main = hakyll $ do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
-            >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
-            >>= relativizeUrls
+        compile $ do
+            id <- getUnderlying
+            t <- getTags id
+            let ctx = if (length t) > 0 then
+                        (tagCtx tags) `mappend` postCtx
+                      else
+                        postCtx
+            pandocCompiler
+                >>= loadAndApplyTemplate "templates/post.html"    ctx
+                >>= loadAndApplyTemplate "templates/default.html"  ctx
+                >>= relativizeUrls
 
 
     match "index.html" $ do
@@ -55,7 +62,7 @@ main = hakyll $ do
             let ctx = constField "title" title
                       `mappend` listField "posts" postCtx (return posts)
                       `mappend` defaultContext
-            
+
             makeItem ""
                 >>= loadAndApplyTemplate "templates/tag.html" ctx
                 >>= loadAndApplyTemplate "templates/default.html" ctx
@@ -68,8 +75,5 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
-postCtxWithTags :: Tags -> Context String
-postCtxWithTags tags
-    | len > 0 = tagsField "tags" tags `mappend` postCtx
-    | otherwise = postCtx
-    where len = length (tagsMap tags)
+tagCtx :: Tags -> Context String
+tagCtx tags = tagsField "tags" tags
