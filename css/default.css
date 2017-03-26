@@ -72,7 +72,7 @@ div#footer {
     text-align: center;
     height: 4em;
     background-color: #323232;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     overflow: hidden;
