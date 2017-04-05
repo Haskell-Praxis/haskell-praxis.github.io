@@ -47,7 +47,6 @@ main = hakyll $ do
                     tagListCtx tags                          `mappend`
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Home"                `mappend`
-                    teaserField "teaser" "content"           `mappend`
                     defaultContext
 
             getResourceBody
@@ -75,7 +74,9 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    teaserField "teaser" "content"  `mappend`
+    --constField "content" "content"  `mappend`
+    dateField "date" "%B %e, %Y"    `mappend`
     defaultContext
 
 tagCtx :: Tags -> Context String
