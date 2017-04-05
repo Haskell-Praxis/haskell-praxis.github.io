@@ -1,14 +1,13 @@
 <ul class="post-teaser-list">
     $for(posts)$
         <li>
-            <h2>
+            <h2 class="ptl__title">
                 <a href="$url$">$title$</a>
             </h2>
-            <span>$date$</span>
+            <span class="ptl__subtitle">$date$</span>
             $if(teaser)$
-            <div>
-                $teaser$ <a href="$url$">(read more)</a>
-            </div>
+            <div class="ptl__teaser">$teaser$</div>
+            <a href="$url$" class="ptl__read-more">(read more)</a>
             $endif$
         </li>
     $endfor$

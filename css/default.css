@@ -105,4 +105,13 @@ div.info {
     list-style: none;
     padding: 0;
 }
-
+.ptl__title {
+    margin-bottom: 0;
+}
+.ptl__read-more, .ptl__subtitle {
+    font-size: 14px;
+    font-style: italic;
+}
+.ptl__subtitle {
+    color: #555;
+}
