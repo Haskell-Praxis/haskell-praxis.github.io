@@ -44,4 +44,5 @@ author: Kevin Singer, [ADD YOUR NAME HERE]
 |usability               |    **yes**    |    **yes**     |    **yes**    |       ?       |       ?       |       ?       |
 
 \* [multi-package-problem](http://andrewufrank.blogspot.co.at/2017/03/the-haskell-tool-stack-for-multi.html) solvable. This also means, that other functionality (e.g. jump-to-declaration) should work across these projects.
+
 \*\* can be done via `stack build --file-watch` in any terminal
