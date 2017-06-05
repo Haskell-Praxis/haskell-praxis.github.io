@@ -3,8 +3,6 @@ language: generic
 env:
   global:
   - SSH_KEY="deploy"
-  - GIT_NAME="Travis"
-  - GIT_EMAIL="travis@haskell-praxis"
   - SOURCE_DIR="_site"
   - DEPLOY_BRANCH="blog"
 cache:

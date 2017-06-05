@@ -28,6 +28,10 @@ if [ -n "$TRAVIS_BUILD_ID" ]; then
   #
   echo DEPLOY_BRANCH: $DEPLOY_BRANCH
   echo ENCRYPTION_LABEL: $ENCRYPTION_LABEL
+
+  GIT_NAME=`git --no-pager show -s --format='%an' $TRAVIS_COMMIT`
+  GIT_EMAIL=`git --no-pager show -s --format='%ae' $TRAVIS_COMMIT`
+
   echo GIT_NAME: $GIT_NAME
   echo GIT_EMAIL: $GIT_EMAIL
   if [ "$TRAVIS_BRANCH" != "$DEPLOY_BRANCH" ]; then
