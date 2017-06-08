@@ -133,7 +133,7 @@ Here is my final `.travis.yml`
 sudo: false
 
 # Do not choose a language; we provide our own build tools.
-language: haskell
+language: generic
 
 # Caching so the next build will be fast too.
 cache:
@@ -150,15 +150,17 @@ before_install:
   # Download and unpack the stack executable
   - mkdir -p ~/.local/bin
   - export PATH=$HOME/.local/bin:$PATH
+  # required for shc
   - export TRAVIS=travis-ci
   - export TRAVIS_JOB_ID=1234 # random number
+  # download stack
   - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
-  # build shc
   - cd ..
   - git clone https://github.com/fendor/stack-hpc-coveralls.git
   - cd stack-hpc-coveralls
+  - stack --no-terminal --install-ghc test --only-dependencies
   - stack build
-  - cp .stack-work/install/x86_64-linux/lts-8.13/8.0.2/bin/shc ~/.local/bin/
+  - cp `stack path --local-install-root`/bin/shc ~/.local/bin/
   - cd ../core-catcher
   - ls ../ # debug reasons
 
@@ -176,7 +178,8 @@ after_script:
   # publish coverage results coveralls.io
   # after_script might clean some things
   - export TRAVIS_JOB_ID=${TRAVIS_BUILD_ID}
-  # publish information
   - ~/.local/bin/shc --repo-token=${repo_token} core-catcher core-catcher-test
-  - cat json.file # debug reasons
+  # debug see the generated json file
+  - cat json.file
+
 ```
