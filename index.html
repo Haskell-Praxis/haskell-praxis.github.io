@@ -4,10 +4,11 @@ title: Home
 
 <img src="/images/haskell-logo.png" style="float: right; margin: 10px;" />
 
-<h2>Posts</h2>
 $partial("templates/post-list.html")$
 
 $if(tags)$
+<aside>
 <h2>Tags</h2>
 $tags$
+</aside>
 $endif$

@@ -33,6 +33,7 @@ main = hakyll $ do
                       else
                         postCtx
             pandocCompiler
+                >>= saveSnapshot "content"
                 >>= loadAndApplyTemplate "templates/post.html"    ctx
                 >>= loadAndApplyTemplate "templates/default.html"  ctx
                 >>= relativizeUrls
@@ -73,7 +74,9 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    teaserField "teaser" "content"  `mappend`
+    --constField "content" "content"  `mappend`
+    dateField "date" "%B %e, %Y"    `mappend`
     defaultContext
 
 tagCtx :: Tags -> Context String
